@@ -176,6 +176,7 @@ def story(storyfile):
         print(text_end_papers_please)
         storyfile.write("\n" + text_end_papers_please + "\n")
         print('<' * 10 + "КОНЦОВКА \"Papers, please\"" + '>' * 10)
+        exit(0)
 
     print(text_oksana_route)
     storyfile.write("\n" + text_oksana_route + "\n")
