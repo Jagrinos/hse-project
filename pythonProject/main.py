@@ -1,5 +1,4 @@
 #get all text parts and write to variables
-from typing_extensions import TextIO
 
 with open("text.txt", 'r', encoding='utf-8') as textfile:
     content = textfile.read()
