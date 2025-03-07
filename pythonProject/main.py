@@ -74,25 +74,24 @@ def generate_rand_str(s: str):
 
 def story(storyfile):
     print(text_start)
-    storyfile.write(text_start)
+    storyfile.write("\n" + text_start + "\n")
 
-    storyfile.write("Кому позвонить?\n1. Позвонить Оксане\n2. Позвонить Глебу\n")
     while True:
         choice = input("Кому позвонить?\n1. Позвонить Оксане\n2. Позвонить Глебу\n")
         if choice == "1":
             config["route"] = "OKSANA"
             print(text_call_oksana)
-            storyfile.write(text_call_oksana)
+            storyfile.write("\n" + text_call_oksana + "\n")
             break
         if choice == "2":
             config["route"] = "GLEB"
             print(text_call_gleb)
-            storyfile.write(text_call_gleb)
+            storyfile.write("\n" + text_call_gleb + "\n")
             break
         print("Неверный выбор")
 
     print(text_bef_items)
-    storyfile.write(text_bef_items)
+    storyfile.write("\n" + text_bef_items + "\n")
     while True:
         print("Ваши предметы:")
         for i in pockets:
@@ -105,20 +104,20 @@ def story(storyfile):
                 print(i)
             break
 
-    storyfile.write("Ваши предметы:")
+    storyfile.write("Ваши предметы:\n")
     for i in pockets:
         storyfile.write(i+"\n")
 
     var_for_random = ""
     print(text_password_bruteforce)
-    storyfile.write(text_password_bruteforce)
+    storyfile.write("\n" + text_password_bruteforce + "\n")
     for i in range(3):
         password = input("Введите пароль...\n")
         if password == "4882":
             config["phone"] = "UNLOCKED"
             print("Пароль верный")
             print(text_password_bruteforce_passed)
-            storyfile.write(text_password_bruteforce_passed)
+            storyfile.write("\n" + text_password_bruteforce_passed + "\n")
             break
         if i != 2:
             print("Пароль неверный, осталось попыток: ", 2 - i)
@@ -126,43 +125,43 @@ def story(storyfile):
         config["phone"] = "LOCKED"
         print("Телефон заблокирован!")
         print(text_password_bruteforce_not_passed)
-        storyfile.write(text_password_bruteforce_not_passed)
+        storyfile.write("\n" + text_password_bruteforce_not_passed + "\n")
         var_for_random = password
 
     #random banned ;(
     if config["phone"] == "LOCKED":
         if generate_rand_str(var_for_random) == 0:
             print(text_end_citizen)
-            storyfile.write(text_end_citizen)
+            storyfile.write("\n" + text_end_citizen + "\n")
             print('<' * 10 + "КОНЦОВКА \"КОРЕННОЙ ЖИТЕЛЬ\"" + '>' * 10)
             exit(0)
         print(text_random_get_to_place)
-        storyfile.write(text_random_get_to_place)
+        storyfile.write("\n" + text_random_get_to_place + "\n")
     else:
         while True:
             choice = input("Что делать?\n1.Вызвать такси\n2.Срезать через парк\n3. Идти по улице\n")
             if choice == "1":
                 if "Деньги" in pockets:
                     print(text_taxi_with_money)
-                    storyfile.write(text_taxi_with_money)
+                    storyfile.write("\n" + text_taxi_with_money + "\n")
                     break
                 print(text_taxi_no_money)
-                storyfile.write(text_taxi_no_money)
+                storyfile.write("\n" + text_taxi_no_money + "\n")
                 continue
             if choice == "2":
                 if "Зажигалка" in pockets:
                     print(text_park_with_lighter)
-                    storyfile.write(text_park_with_lighter)
+                    storyfile.write("\n" + text_park_with_lighter + "\n")
                     break
                 print(text_end_not_your_day)
-                storyfile.write(text_end_not_your_day)
+                storyfile.write("\n" + text_end_not_your_day + "\n")
                 print('<' * 10 + "КОНЦОВКА \"НЕ ТВОЙ ДЕНЬ\"" + '>' * 10)
                 storyfile.write('<' * 10 + "КОНЦОВКА \"НЕ ТВОЙ ДЕНЬ\"" + '>' * 10)
                 exit(0)
             if choice == "3":
                 if config["route"] == "OKSANA":
                     print(text_end_train_is_gone)
-                    storyfile.write(text_end_train_is_gone)
+                    storyfile.write("\n" + text_end_train_is_gone + "\n")
                     print('<' * 10 + "КОНЦОВКА \"Конец никогда не наступит. Поезд ушёл\"" + '>' * 10)
                 break
             print("Неправильный выбор")
@@ -172,15 +171,15 @@ def story(storyfile):
         storyfile.write(text_gleb_route)
         if "Паспорт" in pockets:
             print(text_end_default_guy)
-            storyfile.write(text_end_default_guy)
+            storyfile.write("\n" + text_end_default_guy + "\n")
             print('<' * 10 + "КОНЦОВКА \"НОРМИС\"" + '>' * 10)
             exit(0)
         print(text_end_papers_please)
-        storyfile.write(text_end_papers_please)
+        storyfile.write("\n" + text_end_papers_please + "\n")
         print('<' * 10 + "КОНЦОВКА \"Papers, please\"" + '>' * 10)
 
     print(text_oksana_route)
-    storyfile.write(text_oksana_route)
+    storyfile.write("\n" + text_oksana_route + "\n")
     catacombs = {
         "left":  0,
         "right": 0
@@ -188,19 +187,19 @@ def story(storyfile):
     while True:
         if catacombs["left"] > 4 and catacombs["right"] < 3:
             print(text_end_prisoners)
-            storyfile.write(text_end_prisoners)
+            storyfile.write("\n" + text_end_prisoners + "\n")
             print('<' * 10 + "КОНЦОВКА \"ПЛЕННИКИ РАЗУМА\"" + '>' * 10)
             storyfile.write('<' * 10 + "КОНЦОВКА \"ПЛЕННИКИ РАЗУМА\"" + '>' * 10)
             break
         if catacombs["left"] > 2 and catacombs["right"] > 2:
             print(text_end_lovecraft)
-            storyfile.write(text_end_lovecraft)
+            storyfile.write("\n" + text_end_lovecraft + "\n")
             print('<' * 10 + "КОНЦОВКА \"H. P. Lovecraft\"" + '>' * 10)
             storyfile.write('<' * 10 + "КОНЦОВКА \"H. P. Lovecraft\"" + '>' * 10)
             break
         if catacombs["left"] < 4 and catacombs["right"] > 3:
             print(text_end_farewell)
-            storyfile.write(text_end_farewell)
+            storyfile.write("\n" + text_end_farewell + "\n")
             print('<' * 10 + "КОНЦОВКА \"Farewell\"" + '>' * 10)
             storyfile.write('<' * 10 + "КОНЦОВКА \"Farewell\"" + '>' * 10)
             break
