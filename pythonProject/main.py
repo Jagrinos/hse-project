@@ -162,6 +162,7 @@ def story(storyfile):
                     print(text_end_train_is_gone)
                     storyfile.write("\n" + text_end_train_is_gone + "\n")
                     print('<' * 10 + "КОНЦОВКА \"Конец никогда не наступит. Поезд ушёл\"" + '>' * 10)
+                    exit(0)
                 break
             print("Неправильный выбор")
 
