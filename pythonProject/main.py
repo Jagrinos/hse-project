@@ -1,5 +1,6 @@
-#get all text parts and write to variables
+#Критерий нет библиотек
 
+#get all text parts and write to variables
 with open("text.txt", 'r', encoding='utf-8') as textfile:
     content = textfile.read()
 texts = content.split('\n\n')
@@ -25,11 +26,10 @@ text_end_prisoners = texts[18]
 text_end_lovecraft = texts[19]
 text_end_farewell = texts[20]
 
-
+#Критерий используется готовый словарь
 #config - structure that preserves all the choices
 config = {
-    "route": "",
-    "phone": ""
+    "route": ""
 }
 
 #list with items
@@ -41,30 +41,31 @@ def work_with_pockets(choice: str):
     item = "UNDEFINED"
     if len(data) != 2:
         return "Проверьте ввод"
-    if data[1] == "1":
+    if data[1] == "1" or data[1].lower() == "таблетки":
         item = "Таблетки"
-    if data[1] == "2":
+    if data[1] == "2" or data[1].lower() == "деньги":
         item = "Деньги"
-    if data[1] == "3":
+    if data[1] == "3" or data[1].lower() == "зажигалку":
         item = "Зажигалка"
-    if data[1] == "4":
+    if data[1] == "4" or data[1].lower() == "повербанк":
         item = "Повербанк"
-    if data[1] == "5":
+    if data[1] == "5" or data[1].lower() == "паспорт":
         item = "Паспорт"
     if item == "UNDEFINED":
         return "Проверьте ввод"
 
-    if data[0] == "Взять":
+    if data[0].lower() == "взять":
         if item in pockets:
             return "Предмет уже взят!"
-        pockets.append(item)
+        pockets.append(item) #Критерий два метода списков
         return "GOOD"
-    if data[0] == "Вернуть":
+    if data[0].lower() == "вернуть":
         if not(item in pockets):
             return "Предмет не в кармане!"
-        pockets.remove(item)
+        pockets.remove(item) #Критерий два метода списков
         return "GOOD"
     return "Проверьте ввод"
+#Критерий функция
 def generate_rand_str(s: str):
     int_from_s = 0
     for c in s:
@@ -78,7 +79,7 @@ def story(storyfile):
     while True:
         choice = input("Кому позвонить?\n1. Позвонить Оксане\n2. Позвонить Глебу\n")
         if choice == "1":
-            config["route"] = "OKSANA"
+            config["route"] = "OKSANA" #Критерий используется поле из готового словаря
             print(text_call_oksana)
             storyfile.write("\n" + text_call_oksana + "\n")
             break
@@ -96,7 +97,7 @@ def story(storyfile):
         for i in pockets:
             print(i)
 
-        work_with_pockets(input("Список предметов (напишите \"Взять\" или \"Вернуть\" и цифру предмета)\n1. Таблетки\n2. Деньги\n3. Зажигалка\n4. Повербанк\n5. Паспорт\n"))
+        work_with_pockets(input("Список предметов (напишите \"Взять\" или \"Вернуть\" и цифру или название предмета)\n1. Таблетки\n2. Деньги\n3. Зажигалка\n4. Повербанк\n5. Паспорт\n"))
         if len(pockets) == 4:
             print("Ваши предметы:")
             for i in pockets:
@@ -113,7 +114,7 @@ def story(storyfile):
     for i in range(3):
         password = input("Введите пароль...\n")
         if password == "4882":
-            config["phone"] = "UNLOCKED"
+            config["phone"] = "UNLOCKED" #Критерий создается новое поле в словаре
             print("Пароль верный")
             print(text_password_bruteforce_passed)
             storyfile.write("\n" + text_password_bruteforce_passed + "\n")
@@ -213,5 +214,6 @@ def story(storyfile):
             continue
         print("Неверный выбор")
 
+#start program
 with open("story.txt", 'w', encoding='utf-8') as sf:
     story(sf)
