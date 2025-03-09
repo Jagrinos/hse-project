@@ -1,5 +1,6 @@
 #Критерий нет библиотек
 
+
 #get all text parts and write to variables
 with open("text.txt", 'r', encoding='utf-8') as textfile:
     content = textfile.read()
@@ -214,6 +215,6 @@ def story(storyfile):
             continue
         print("Неверный выбор")
 
-#start program
+#start
 with open("story.txt", 'w', encoding='utf-8') as sf:
     story(sf)
